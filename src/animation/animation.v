@@ -5,8 +5,10 @@ module animation_tmod (
     output D0, D1, D2, D3, D4,
     output BR10, BR9, BR8, BR7, BR6, BR5, BR4, BR3, TR5, TR4
 );
-    wire sclk;
-    clockDiv #(.PWR_2(20)) c_mod(.clk(CLK), .reset(TR7), .sclk(sclk));
+    wire [19:0] sclks;
+    clockDiv #(.PWR_2(20)) c_mod(.clk(CLK), .reset(TR7), .sclks(sclks));
+    wire aniClk = sclks[19];
+    wire buttonClk = sclks[16];
 
     assign D0 = 0;
     assign D1 = 0;
@@ -67,11 +69,11 @@ module animation_tmod (
     assign offset = block*20;
 
     wire b0;
-    button d0_mod(.clk(CLK), .sclk(sclk), .i(TR9), .o(b0));
+    button d0_mod(.clk(CLK), .sclk(buttonClk), .i(TR9), .o(b0));
 
     assign {BR10, BR9, BR8, BR7, BR6, BR5, BR4, BR3, TR5, TR4} = MEM[PC + offset];
 
-    always @(posedge sclk) begin
+    always @(posedge aniClk) begin;
         PC <= (TR10 || PC==20) ? 0 : (PC+1);
     end
 

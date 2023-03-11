@@ -51,13 +51,12 @@ endmodule
 module clockDiv #(parameter PWR_2 = 17)(
     input clk,
     input reset,
-    output sclk
+    output [PWR_2-1:0]sclks
 );
     reg [PWR_2-1:0] r;
+    assign sclks = r;
 
     always @(posedge clk) begin
         r <= r + 1;
     end
-
-    assign sclk = r[PWR_2-1];
 endmodule

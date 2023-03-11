@@ -38,8 +38,9 @@ module lock_tmod (
     output D0, D1, D2, D3, D4,
     output BR10, BR9, BR8, BR7, BR6, BR5, BR4, BR3, TR5, TR4
 );
-    wire sclk;
-    clockDiv c_mod(.clk(CLK), .reset(TR7), .sclk(sclk));
+    wire [16:0] sclks;
+    clockDiv #(.PWR_2(17)) c_mod(.clk(CLK), .reset(TR7), .sclks(sclks));
+    wire sclk = sclks[16];
 
     reg [9:0] code = 10'b1000000110;
 
