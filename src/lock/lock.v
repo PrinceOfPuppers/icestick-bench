@@ -32,7 +32,7 @@ module lock #(parameter CODE_SIZE=8)(
 endmodule
 
 
-module tmod (
+module lock_tmod (
     input CLK,
     input TR10, TR9, TR8, TR7,
     output D0, D1, D2, D3, D4,
