@@ -1,4 +1,7 @@
-module button(input clk, sclk, i, output o);
+module button(
+    input clk, sclk, i, 
+    output o
+);
     // debounce
     reg [2:0] counter;
     wire db;
@@ -22,7 +25,10 @@ module button(input clk, sclk, i, output o);
     assign o = r2;
 endmodule
 
-module buttonPulse(input clk, sclk, i, output o);
+module buttonPulse(
+    input clk, sclk, i, 
+    output o
+);
     // debounce
     reg [2:0] counter;
     wire db;
@@ -50,7 +56,6 @@ endmodule
 
 module clockDiv #(parameter PWR_2 = 17)(
     input clk,
-    input reset,
     output [PWR_2-1:0]sclks
 );
     reg [PWR_2-1:0] r;

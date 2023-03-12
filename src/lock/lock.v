@@ -39,7 +39,7 @@ module lock_tmod (
     output BR10, BR9, BR8, BR7, BR6, BR5, BR4, BR3, TR5, TR4
 );
     wire [16:0] sclks;
-    clockDiv #(.PWR_2(17)) c_mod(.clk(CLK), .reset(TR7), .sclks(sclks));
+    clockDiv #(.PWR_2(17)) c_mod(.clk(CLK), .sclks(sclks));
     wire sclk = sclks[16];
 
     reg [9:0] code = 10'b1000000110;
@@ -59,8 +59,7 @@ module lock_tmod (
     buttonPulse d0_mod(.clk(CLK), .sclk(sclk), .i(TR10), .o(b0));
     buttonPulse d1_mod(.clk(CLK), .sclk(sclk), .i(TR9),  .o(b1));
     buttonPulse d2_mod(.clk(CLK), .sclk(sclk), .i(TR8),  .o(b2));
-    buttonPulse d3_mod(.clk(CLK), .sclk(sclk), .i(TR7),  .o(b3));
 
-    lock #(10) l(.clk(CLK), .b0(b0), .b1(b1), .enter(b2), .reset(b3), .code(code), .out(locked), .currentOut(current));
+    lock #(10) l(.clk(CLK), .b0(b0), .b1(b1), .enter(b2), .reset(TR7), .code(code), .out(locked), .currentOut(current));
 
 endmodule
