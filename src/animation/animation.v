@@ -73,7 +73,7 @@ module animation_tmod (
 
     assign {BR10, BR9, BR8, BR7, BR6, BR5, BR4, BR3, TR5, TR4} = MEM[PC + offset];
 
-    always @(posedge aniClk) begin;
+    always @(posedge aniClk) begin
         PC <= (TR7 || PC==19) ? 0 : (PC+1);
     end
 
